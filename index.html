@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Rose Day laibuu bacha | For You</title>
+    <style>
+        /* --- CSS STYLES --- */
+        :root {
+            --rose-red: #e63946;
+            --soft-pink: #ffb3c1;
+            --glass: rgba(255, 255, 255, 0.25);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffafbd 0%, #ffc3a0 100%);
+            font-family: 'Poppins', sans-serif;
+            overflow: hidden;
+        }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            width: 320px;
+            z-index: 2;
+            transition: transform 0.3s ease;
+        }
+
+        .img-box {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 20px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid white;
+            transition: all 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .img-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            color: #800f2f;
+            font-size: 1.8rem;
+            margin: 10px 0;
+        }
+
+        p {
+            color: #590d22;
+            font-size: 1rem;
+            line-height: 1.4;
+        }
+
+        .btn {
+            background: var(--rose-red);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(230, 57, 70, 0.4);
+            transition: 0.3s;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            background: #c1121f;
+        }
+
+        /* Surprise Animations */
+        .heart-mode {
+            border-radius: 20px !important;
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 0 25px var(--rose-red);
+        }
+
+        .rose-petal {
+            position: fixed;
+            top: -10%;
+            font-size: 24px;
+            z-index: 1;
+            animation: fall linear forwards;
+        }
+
+        @keyframes fall {
+            to {
+                transform: translateY(110vh) rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="img-box" id="photoFrame">
+            <img src="D1BAE003-8725-4236-8A82-B79960C012C7.JPG" alt="Happy Rose Day">
+        </div>
+        <h1>Happy Rose Day bacha!</h1>
+        <p>A rose speaks of love silently, in a language known only to the heart.</p>
+        <button class="btn" onclick="celebrate()">Click for Surprise 🌹</button>
+    </div>
+
+    <audio id="bgMusic" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
+
+    <script>
+        /* --- JAVASCRIPT LOGIC --- */
+        function celebrate() {
+            const music = document.getElementById('bgMusic');
+            const frame = document.getElementById('photoFrame');
+            
+            // Play Music
+            music.play().catch(e => console.log("Audio requires user interaction first."));
+
+            // Transform Image
+            frame.classList.add('heart-mode');
+
+            // Create Falling Roses
+            for(let i=0; i<50; i++) {
+                setTimeout(createPetal, i * 100);
+            }
+        }
+
+        function createPetal() {
+            const petal = document.createElement('div');
+            petal.innerHTML = '🌹';
+            petal.classList.add('rose-petal');
+            petal.style.left = Math.random() * 100 + 'vw';
+            petal.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            petal.style.fontSize = (Math.random() * 20 + 20) + 'px';
+            
+            document.body.appendChild(petal);
+
+            // Clean up memory
+            setTimeout(() => {
+                petal.remove();
+            }, 5000);
+        }
+    </script>
+</body>
+</html>
